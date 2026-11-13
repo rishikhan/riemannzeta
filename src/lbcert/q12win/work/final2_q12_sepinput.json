@@ -1,0 +1,31 @@
+{
+ "description": "Input for src/sep_conditions_cert.py: the window of src/lbcert/q12win/work/final2_q12.json and the target c of the q = 12 Lean proof (model m12w2), c = 80779984271103719947859644889 / (2^23 * 10^24).",
+ "window": {
+  "numerators": [
+   1000000000,
+   14564693,
+   -17645853,
+   7869625,
+   4852247,
+   1453496,
+   2247687,
+   -4183770,
+   1416728,
+   -3647215,
+   4135017,
+   -2380114,
+   3521384,
+   -3153149,
+   3602408,
+   -3727658,
+   3294246
+  ],
+  "denominator": 1000000000
+ },
+ "local_certificate": {
+  "target": {
+   "numerator": 80779984271103719947859644889,
+   "denominator": 8388608000000000000000000000000
+  }
+ }
+}

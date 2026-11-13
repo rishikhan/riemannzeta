@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+proofs/archives/
+proofs/q9/
+proofs/q1[0-2]/
+proofs/.tools/
+results/rerun/
+src/lbcert/q12x/cpp_race/xgen
+src/lbcert/q12x/m12w/wdiag
+src/lbcert/q12/gmin12_cpp/bin/
+*.so
+*.dylib
+paper/*.aux
+paper/*.log
+paper/*.out

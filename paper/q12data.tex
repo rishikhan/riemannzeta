@@ -1,0 +1,98 @@
+% q12data.tex -- numbers of the q = 12 Lean proof and of the window of the main
+% theorem (hand-kept; not generated).
+%
+% Proof of record: model m12w2, window src/lbcert/q12win/work/final2_q12.json,
+% refit src/lbcert/q12win/work/refit96_q12_pm_g18i16.json, 3,789,405 leaves;
+% source and logs in the q12 archive of proofs/archives.tsv (Q12/Simple.lean, the
+% N0simple theorems, added 2026-10-26).  Checker logs of record: q12/logs/ver
+% (verify.txt, nanoda.log, preplay.log; export of Q12.Simple with five theorems,
+% 1,750,125,618 bytes).  Verified by both checkers 2026-10-27.  The logs of the
+% export with only the three template theorems (2026-10-26) are in
+% q12/logs/ver_three_theorems.
+%
+% How the derived values were computed (2026-10-26):
+%   \qKappa...\qB, \qGainMT, \qHbelowMT, \qEnergyMT, \qCeilGap, \qdFdH, \qdFdc,
+%   \qDiff...: exact rationals from the Lean source (HW_ge, W13_B, cert_AM),
+%     with H_MT and the ceiling 0.681 defined below;
+%   \qHmargin: pipeline/hfloor.py H_interval at 60 digits on the window,
+%     lower endpoint minus H_W^-;
+%   \qVmin, \qVminAt, \qAbsTail, \qPosBound: the minimum of v on [0, 1/2] by a scan
+%     of 20,001 points refined six times around the smallest, and the tail sum of the numerators (4379/5760 - 81695290/10^9 = 0.67854...);
+%   \qSep...: src/sep_conditions_cert.py --cert
+%     src/lbcert/q12win/work/final2_q12_sepinput.json, record
+%     results/sep_conditions_final2_q12.json (Arb, 20,000 segments);
+%   \qWindowRows: the numerators of final2_q12.json.
+
+% Shared constants.
+\newcommand{\qQ}{12}
+\newcommand{\qNpts}{13}
+\newcommand{\qNpairs}{78}
+\newcommand{\qRoots}{9}
+\newcommand{\qScale}{2^{23}\cdot10^{24}}
+\newcommand{\qRecordNum}{1669044344675499575055516274525441801367}
+\newcommand{\qRecordDen}{2477793188117925391575000000000000000000}
+\newcommand{\qRecord}{0.6736011514}
+\newcommand{\qNineKappa}{0.6736387063}
+
+% The proof of record and its window.
+\newcommand{\qWindowFile}{\texttt{final2\_q12.json}}
+\newcommand{\qKappaNum}{854046308300026565326564954594528531931648}
+\newcommand{\qKappaDen}{1267673952595351605232565361802825927734375}
+\newcommand{\qKappa}{0.67371133291}
+\newcommand{\qKappaShort}{0.6737113}
+\newcommand{\qHnum}{6720761997177286221959388707769754155716}
+\newcommand{\qH}{0.6720761997177286}
+\newcommand{\qHshort}{0.6720762}
+\newcommand{\qHmargin}{7.7\times10^{-41}}
+\newcommand{\qcNum}{80779984271103719947859644889}
+\newcommand{\qc}{0.0096297245}
+\newcommand{\qcShort}{0.0096297}
+\newcommand{\qBNum}{40705899486681963457654292480}
+\newcommand{\qB}{0.0048525213}
+\newcommand{\qDiffNine}{7.26\times10^{-5}}
+\newcommand{\qGainMT}{1.21\times10^{-3}}
+\newcommand{\qHbelowMT}{4.25\times10^{-4}}
+\newcommand{\qEnergyMT}{1.64\times10^{-3}}
+\newcommand{\qCeilGap}{7.3\times10^{-3}}
+\newcommand{\qdFdH}{1.010}
+\newcommand{\qdFdc}{0.680}
+\newcommand{\qAbsTail}{81\,695\,290}
+\newcommand{\qPosBound}{0.678}
+\newcommand{\qVmin}{0.7357}
+\newcommand{\qVminAt}{0.466}
+\newcommand{\qSepMajMargin}{0.1322}
+\newcommand{\qSepLam}{1.9271}
+\newcommand{\qSepCloseMargin}{0.1012}
+\newcommand{\qWindowRows}{%
+$0$ & $\sqrt2$ & $1\,000\,000\,000$ & $6$ & $12\pi$ & $2\,247\,687$ & $12$ & $24\pi$ & $3\,521\,384$\\
+$1$ & $2\pi$ & $14\,564\,693$ & $7$ & $14\pi$ & $-4\,183\,770$ & $13$ & $26\pi$ & $-3\,153\,149$\\
+$2$ & $4\pi$ & $-17\,645\,853$ & $8$ & $16\pi$ & $1\,416\,728$ & $14$ & $28\pi$ & $3\,602\,408$\\
+$3$ & $6\pi$ & $7\,869\,625$ & $9$ & $18\pi$ & $-3\,647\,215$ & $15$ & $30\pi$ & $-3\,727\,658$\\
+$4$ & $8\pi$ & $4\,852\,247$ & $10$ & $20\pi$ & $4\,135\,017$ & $16$ & $32\pi$ & $3\,294\,246$\\
+$5$ & $10\pi$ & $1\,453\,496$ & $11$ & $22\pi$ & $-2\,380\,114$ &  &  & \\}
+\newcommand{\qLeaves}{3\,789\,405}
+\newcommand{\qRefl}{566\,603}
+\newcommand{\qModules}{143}
+\newcommand{\qCuts}{19\,901}
+\newcommand{\qPoints}{31\,073}
+\newcommand{\qSource}{425.3\,MB}
+\newcommand{\qExport}{1.75\,GB}
+\newcommand{\qConstants}{332\,379}
+\newcommand{\qNanodaTime}{6.10\,h}
+\newcommand{\qNanodaMem}{14.4\,GB}
+\newcommand{\qReplayTime}{3.88\,h}
+\newcommand{\qReplayMem}{15.0\,GB}
+\newcommand{\qVerifiedDate}{October 27, 2026}
+
+% Window family and constants that do not depend on the certificate.
+% H_MT = 3/2 - cot(1/sqrt 2)/sqrt 2; the ceiling is the numerical estimate of
+% Section sec:limits; gamma_Delta and the
+% segment count are those of results/sep_conditions_final2_q12.json.
+\newcommand{\qNharm}{16}
+\newcommand{\qNharmWordCap}{Sixteen}
+\newcommand{\qCden}{10^{9}}
+\newcommand{\qHMT}{0.6725007}
+\newcommand{\qHMTlong}{0.6725007036794116}
+\newcommand{\qCeiling}{0.681}
+\newcommand{\qSepGamma}{7/10}
+\newcommand{\qSepSegments}{20\,000}

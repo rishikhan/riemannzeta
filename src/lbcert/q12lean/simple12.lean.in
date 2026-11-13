@@ -1,0 +1,106 @@
+/- Simple-zero form of the Q = @@Q@@ certificate's final theorems (Lake library @@LIB@@). Copyright, license (Apache-2.0)
+and attribution notices: @@LIB@@.Base and @@LIB@@.Final. Changes (Apache-2.0 §4(b)), @@DATE@@, by Rishi Khan: this module
+adds the N0simple statements. OpethN.ActualDefect.actual_dyadic in @@LIB@@.Final proves the N0simple bound as its step
+`hs` and then weakens it to N0star; actual_dyadic_simple below is the same proof without that weakening. The κ
+literal and the certificate constants (@@WN@@, c) are those of @@LIB@@.Final's Opeth.AMFinal. No existing declaration
+changes. -/
+import @@LIB@@.Final
+-- The build skips its own kernel check; nanoda and the Lean kernel replay of the export check every declaration.
+set_option debug.skipKernelTC true
+set_option maxHeartbeats 4000000
+
+section
+noncomputable section
+open Filter Topology Zeta23
+open Zeta23Ext.Bridge Zeta23Ext.BridgeW
+open scoped BigOperators
+namespace OpethN.ActualDefect
+open Classical
+theorem actual_dyadic_simple {n : ℕ} (hn : 2 ≤ n) (W : WCert n) (hW : W.Adm) {c B : ℝ}
+    (hc0 : 0 < c) (hc64 : c ≤ 1 / 64) (hB : W.B = B)
+    (hCert : ∀ g : Fin (n - 1) → ℝ, (∀ i, 0 ≤ g i) → c ≤ Fw W g) :
+    ∀ ε > (0 : ℝ), ∃ T₀ : ℝ, ∀ T ≥ T₀,
+      ((@@HW@@ / 10000000000000000000000000000000000000000 - B) / (1 - c) - ε) * (Zeta23.Ncount T (2 * T) : ℝ) ≤
+        Zeta23.N0simple T (2 * T) := by
+  have hB0 : 0 ≤ B := hB ▸ WCert.B_nonneg hW
+  have hdef := actual_defect_estimate zetaZeroConfig hn W hW hc0.le hc64 hB hCert
+  intro ε hε
+  obtain ⟨T₀, hT₀⟩ := eventually_atTop.mp
+    (OpethN.Counting.defect_to_dyadic zetaZeroConfig paperInputs_zeta hn hc0
+      (by linarith) hB0 hdef ε hε)
+  refine ⟨T₀, fun T hT => ?_⟩
+  simpa only [zetaZeroConfig_N, zetaZeroConfig_N0s] using hT₀ T hT
+theorem actual_cumulative_simple {n : ℕ} (hn : 2 ≤ n) (W : WCert n) (hW : W.Adm) {c B : ℝ}
+    (hc0 : 0 < c) (hc64 : c ≤ 1 / 64) (hB : W.B = B)
+    (hCert : ∀ g : Fin (n - 1) → ℝ, (∀ i, 0 ≤ g i) → c ≤ Fw W g) :
+    ∀ ε > (0 : ℝ), ∃ T₀ : ℝ, ∀ T ≥ T₀,
+      ((@@HW@@ / 10000000000000000000000000000000000000000 - B) / (1 - c) - ε) * (Zeta23.Ncount 0 T : ℝ) ≤
+        Zeta23.N0simple 0 T :=
+  Zeta23.cumulative_of_dyadic Zeta23.zetaSeam Zeta23.paperInputs_zeta.RvM
+    (fun _ _ _ => Zeta23.N0simple_add' Zeta23.zetaSeam) (actual_dyadic_simple hn W hW hc0 hc64 hB hCert)
+end OpethN.ActualDefect
+end
+end
+
+section
+noncomputable section
+open Zeta23
+open Zeta23Ext.BridgeW
+namespace Opeth.AMFinal
+theorem actual_dyadic_simple :
+    ∀ ε > (0 : ℝ), ∃ T₀ : ℝ, ∀ T ≥ T₀,
+      ((@@KN@@ / @@KD@@ : ℝ) - ε) * (Zeta23.Ncount T (2 * T) : ℝ) ≤
+        Zeta23.N0simple T (2 * T) := by
+  have h := OpethN.ActualDefect.actual_dyadic_simple (by norm_num : 2 ≤ @@N@@) RiemannFail.@@WN@@ RiemannFail.@@WN@@_adm
+    (by norm_num : (0 : ℝ) < @@CN@@ / @@SA@@) (by norm_num) RiemannFail.@@WN@@_B (RiemannFail.cert_AM)
+  have e : ((@@HW@@ / 10000000000000000000000000000000000000000 - (@@B@@ : ℝ) / @@SA@@) / (1 - (@@CN@@ : ℝ) / @@SA@@))
+      = @@KN@@ / @@KD@@ := by norm_num
+  simpa only [e] using h
+theorem actual_cumulative_simple :
+    ∀ ε > (0 : ℝ), ∃ T₀ : ℝ, ∀ T ≥ T₀,
+      ((@@KN@@ / @@KD@@ : ℝ) - ε) * (Zeta23.Ncount 0 T : ℝ) ≤
+        Zeta23.N0simple 0 T := by
+  have h := OpethN.ActualDefect.actual_cumulative_simple (by norm_num : 2 ≤ @@N@@) RiemannFail.@@WN@@ RiemannFail.@@WN@@_adm
+    (by norm_num : (0 : ℝ) < @@CN@@ / @@SA@@) (by norm_num) RiemannFail.@@WN@@_B (RiemannFail.cert_AM)
+  have e : ((@@HW@@ / 10000000000000000000000000000000000000000 - (@@B@@ : ℝ) / @@SA@@) / (1 - (@@CN@@ : ℝ) / @@SA@@))
+      = @@KN@@ / @@KD@@ := by norm_num
+  simpa only [e] using h
+end Opeth.AMFinal
+end
+end
+
+-- The statements below use the challenge definitions Ncount and N0simple (root namespace, ChallengeDeps) and
+-- candidateKappa (ChallengeDeps.CandidateSpec), as candidate_critical_line_bound does for N0star.
+section
+noncomputable section
+private theorem candidate_kappa_exact_simple :
+    candidateKappa = (@@KN@@ / @@KD@@ : ℝ) := by
+  norm_num [candidateKappa]
+theorem candidate_simple_critical_line_bound :
+    ∀ ε > 0, ∃ T₀ : ℝ, ∀ T ≥ T₀,
+      (candidateKappa - ε) * (Ncount T (2 * T) : ℝ) ≤ N0simple T (2 * T) := by
+  rw [candidate_kappa_exact_simple]
+  exact Opeth.AMFinal.actual_dyadic_simple
+theorem candidate_simple_critical_line_bound_cumulative :
+    ∀ ε > 0, ∃ T₀ : ℝ, ∀ T ≥ T₀,
+      (candidateKappa - ε) * (Ncount 0 T : ℝ) ≤ N0simple 0 T := by
+  rw [candidate_kappa_exact_simple]
+  exact Opeth.AMFinal.actual_cumulative_simple
+end
+end
+
+#print axioms candidate_strict_improvement
+#print axioms candidate_critical_line_bound
+#print axioms candidate_critical_line_bound_cumulative
+#print axioms candidate_simple_critical_line_bound
+#print axioms candidate_simple_critical_line_bound_cumulative
+#print axioms OpethN.ActualDefect.actual_dyadic_simple
+#print axioms OpethN.ActualDefect.actual_cumulative_simple
+#print axioms Opeth.AMFinal.actual_dyadic_simple
+#print axioms Opeth.AMFinal.actual_cumulative_simple
+set_option pp.fullNames true in
+#check @candidate_simple_critical_line_bound
+set_option pp.fullNames true in
+#check @candidate_simple_critical_line_bound_cumulative
+set_option pp.fullNames true in
+#check @candidate_critical_line_bound

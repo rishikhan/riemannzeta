@@ -1,0 +1,61 @@
+% lengthdata.tex -- the best window at each geometry length q = 9..12
+% (Table tab:ladder, Appendix app:ladder; hand-kept, not generated).
+%
+% Every kappa_L is the exact (H_W^- - B)/(1 - c), c = eps - 6e-7.
+% q = 9: the challenge entry rishikhan-ten-point-certificate, window
+%   results/sepsearch/best_q9_j16.json, model q9a, cover range K_B = 2^20;
+%   kappa from proofs/archives.tsv (row q9); leaves of the submitted file
+%   Solution_Zskip.lean in the q9 archive (27,554 + 49 refl).
+% q = 10, q = 11: src/lbcert/q12win/work/final_q10.json, final_q11.json (lean_kappa,
+%   refit, side_conditions); trees and logs in the q10 and q11 archives.
+% q = 12: q12data.tex.
+% Steps: exact differences of the kappa_L fractions.  Growth: ratios of tree leaves, refl excluded.
+%
+% q = 10, q = 11 Lean proofs (2026-10-27): the q10 and q11 archives of proofs/archives.tsv.
+
+% Table rows' entries.
+\newcommand{\lenNineKappa}{0.6736387063}
+\newcommand{\lenTenKappa}{0.6736701854}
+\newcommand{\lenElevenKappa}{0.6736952870}
+\newcommand{\lenTwelveKappa}{0.6737113329}
+\newcommand{\lenNineFloat}{0.6736391143}
+\newcommand{\lenTenFloat}{0.6736705935}
+\newcommand{\lenElevenFloat}{0.6736956953}
+\newcommand{\lenTwelveFloat}{0.6737117411}
+\newcommand{\lenNineB}{0.0047386}
+\newcommand{\lenTenB}{0.0047584}
+\newcommand{\lenElevenB}{0.0049252}
+\newcommand{\lenTwelveB}{0.0048525}
+\newcommand{\lenNineLeaves}{27\,554}
+\newcommand{\lenNineRefl}{49}
+\newcommand{\lenTenLeaves}{221\,123}
+\newcommand{\lenTenRefl}{164}
+\newcommand{\lenElevenLeaves}{879\,952}
+\newcommand{\lenElevenRefl}{380}
+\newcommand{\lenNineBytes}{1\,890\,088}
+\newcommand{\lenNineVer}{Lean, hosted checker}
+\newcommand{\lenTenVer}{Lean, kernel and nanoda}
+\newcommand{\lenElevenVer}{Lean, kernel and nanoda}
+\newcommand{\lenTwelveVer}{Lean, Theorem~\ref{thm:formal}}
+
+% Steps in kappa_L and leaf growth between lengths.
+\newcommand{\lenStepNineTen}{3.15\times10^{-5}}
+\newcommand{\lenStepTenEleven}{2.51\times10^{-5}}
+\newcommand{\lenStepElevenTwelve}{1.60\times10^{-5}}
+\newcommand{\lenGrowthNineTen}{8.0}
+\newcommand{\lenGrowthTenEleven}{4.0}
+\newcommand{\lenGrowthElevenTwelve}{4.3}
+
+% How the rows are verified (prose of Appendix app:ladder).
+\newcommand{\lenVerNote}{The $q=9$ and $q=12$ rows are the Lean proofs of
+Section~\ref{sec:q12lean}. The $q=10$ and $q=11$ rows are Lean proofs built by
+the same generator as the $q=12$ proof, with the same five exported theorems.
+Before generation, two exact rational checks accept every leaf of their trees:
+the generator's check in C++, run on the assembled trees and again against the
+final table of tangent points, and an independent check in Python, whose leaf
+counts and minimum margins equal those of the C++ check in every root box.
+The Lean kernel, through a replay of the export ($86\,937$ declarations at
+$q=10$, $126\,752$ at $q=11$), and nanoda accept both proofs, and their
+theorems depend only on \texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound}. The Arb check of Proposition~\ref{prop:inputs} gives (W1)
+and (W2) for these two windows with margins at least $0.127$ and $0.101$.}

@@ -1,0 +1,31 @@
+{
+ "description": "Input for src/sep_conditions_cert.py: the window of src/lbcert/q12win/work/final_q11.json and the target c of its q = 11 model m11w, c = 81542871055931216687895357608 / (2^23 * 10^24).",
+ "window": {
+  "numerators": [
+   1000000000,
+   14681747,
+   -17518428,
+   7420502,
+   5420102,
+   904623,
+   2126534,
+   -4493379,
+   1731048,
+   -3288112,
+   4324003,
+   -3094574,
+   3895999,
+   -3902114,
+   3528494,
+   -3582572,
+   3042752
+  ],
+  "denominator": 1000000000
+ },
+ "local_certificate": {
+  "target": {
+   "numerator": 81542871055931216687895357608,
+   "denominator": 8388608000000000000000000000000
+  }
+ }
+}
